@@ -3,353 +3,256 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LEOX7 — Editorial & Architectural Photography</title>
-  
+  <meta name="description" content="LEOX7 — architectural, interior, hospitality and luxury photography for architects, designers, publications and brands.">
+  <meta name="theme-color" content="#f4f2ed">
+  <title>LEOX7 — Architectural Photography & Visual Storytelling</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --lx-bg-base: #0a0a0a;
-      --lx-bg-surface: #121212;
-      --lx-bg-elevated: #1a1a1a;
-      --lx-gold-primary: #d4af37;
-      --lx-gold-muted: rgba(212, 175, 55, 0.45);
-      --lx-gold-subtle: rgba(212, 175, 55, 0.12);
-      --lx-text-light: #f5f5f5;
-      --lx-text-muted: #8e8e8e;
-      --lx-font-serif: "Cinzel", Georgia, serif;
-      --lx-font-sans: "Inter", -apple-system, sans-serif;
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --paper: #f4f2ed;
+      --ink: #171714;
+      --muted: #6d6b64;
+      --line: #d8d4cb;
+      --white: #fff;
+      --max: 1480px;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+      --ease: cubic-bezier(.16,1,.3,1);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; }
+    button { font: inherit; }
+
+    .wrap { width: min(var(--max), calc(100% - 80px)); margin-inline: auto; }
+
+    header {
+      position: fixed; inset: 0 0 auto; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 40px;
+      background: linear-gradient(to bottom, rgba(244,242,237,.96), rgba(244,242,237,.72), transparent);
+      backdrop-filter: blur(8px);
     }
 
-    html {
-      scroll-behavior: smooth;
+    .logo { text-decoration: none; font-size: 15px; font-weight: 600; letter-spacing: .32em; }
+    nav { display: flex; gap: 28px; }
+    nav a { text-decoration: none; text-transform: uppercase; letter-spacing: .14em; font-size: 11px; color: var(--muted); transition: color .25s ease; }
+    nav a:hover { color: var(--ink); }
+
+    .hero { min-height: 100vh; display: grid; grid-template-columns: .82fr 1.18fr; gap: 6vw; align-items: end; padding: 150px 0 55px; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .2em; font-size: 11px; color: var(--muted); margin-bottom: 24px; }
+    h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(52px, 7vw, 112px); line-height: .94; letter-spacing: -.045em; max-width: 760px; }
+    .hero-copy { max-width: 450px; padding-bottom: 8px; }
+    .hero-copy p { font-size: 18px; color: var(--muted); max-width: 410px; margin-bottom: 30px; }
+    .link { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; text-transform: uppercase; letter-spacing: .14em; font-size: 11px; font-weight: 600; border-bottom: 1px solid var(--ink); padding-bottom: 8px; }
+    .link span { transition: transform .3s var(--ease); }
+    .link:hover span { transform: translateX(5px); }
+
+    .hero-image { grid-column: 2; height: min(68vh, 720px); margin-top: -30px; overflow: hidden; }
+    .hero-image img { filter: saturate(.78); transition: transform 1.1s var(--ease); }
+    .hero-image:hover img { transform: scale(1.025); }
+
+    section { padding: 130px 0; }
+    .section-head { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 52px; }
+    .section-kicker { text-transform: uppercase; letter-spacing: .18em; font-size: 11px; color: var(--muted); }
+    h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(38px, 5vw, 68px); line-height: 1; letter-spacing: -.035em; }
+    .section-note { max-width: 360px; color: var(--muted); font-size: 14px; }
+
+    .work-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 34px 22px; }
+    .project { text-decoration: none; display: block; }
+    .project:nth-child(1) { grid-column: span 7; }
+    .project:nth-child(2) { grid-column: 9 / span 4; margin-top: 150px; }
+    .project:nth-child(3) { grid-column: 2 / span 4; margin-top: 40px; }
+    .project:nth-child(4) { grid-column: 7 / span 6; margin-top: -20px; }
+    .project-media { overflow: hidden; background: #ddd9d0; }
+    .project:nth-child(1) .project-media, .project:nth-child(4) .project-media { aspect-ratio: 4 / 3; }
+    .project:nth-child(2) .project-media, .project:nth-child(3) .project-media { aspect-ratio: 3 / 4; }
+    .project img { transition: transform .9s var(--ease); filter: saturate(.78); }
+    .project:hover img { transform: scale(1.04); }
+    .project-meta { padding-top: 13px; display: flex; justify-content: space-between; gap: 20px; font-size: 12px; }
+    .project-title { font-weight: 600; }
+    .project-type { color: var(--muted); }
+
+    .manifesto { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1.4fr; gap: 9vw; align-items: start; }
+    .manifesto h2 { max-width: 600px; }
+    .manifesto-copy { max-width: 650px; }
+    .manifesto-copy p { font-size: clamp(20px, 2.1vw, 30px); line-height: 1.35; margin-bottom: 30px; }
+    .manifesto-copy small { display: block; color: var(--muted); max-width: 510px; font-size: 14px; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
+    .service { padding: 36px 0 42px; border-bottom: 1px solid var(--line); }
+    .service:nth-child(odd) { padding-right: 60px; border-right: 1px solid var(--line); }
+    .service:nth-child(even) { padding-left: 60px; }
+    .service-number { color: var(--muted); font-size: 11px; letter-spacing: .15em; }
+    .service h3 { font-family: var(--serif); font-size: 32px; font-weight: 500; margin: 34px 0 14px; }
+    .service p { color: var(--muted); max-width: 450px; }
+
+    .process { display: grid; grid-template-columns: 1fr 2fr; gap: 8vw; }
+    .process-list { border-top: 1px solid var(--line); }
+    .step { display: grid; grid-template-columns: 55px 1fr; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .step-no { color: var(--muted); font-size: 11px; }
+    .step h3 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
+    .step p { color: var(--muted); font-size: 13px; }
+
+    .contact { background: var(--ink); color: var(--paper); padding: 150px 0; }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; align-items: end; }
+    .contact h2 { font-size: clamp(50px, 7vw, 105px); max-width: 780px; }
+    .contact-copy { color: #aaa79e; max-width: 390px; }
+    .contact-copy p { font-size: 17px; margin-bottom: 30px; }
+    .contact .link { color: var(--paper); border-color: var(--paper); }
+
+    footer { padding: 30px 0; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
+
+    @media (max-width: 900px) {
+      .wrap { width: min(100% - 40px, var(--max)); }
+      header { padding: 18px 20px; }
+      nav { gap: 14px; }
+      nav a { font-size: 10px; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 150px; }
+      .hero-copy { grid-row: 1; }
+      .hero-image { grid-column: 1; height: 58vh; margin-top: 20px; }
+      section { padding: 90px 0; }
+      .manifesto, .process, .contact-inner { grid-template-columns: 1fr; gap: 50px; }
+      .project:nth-child(1), .project:nth-child(2), .project:nth-child(3), .project:nth-child(4) { grid-column: auto; margin-top: 0; }
+      .project:nth-child(2) .project-media, .project:nth-child(3) .project-media { aspect-ratio: 4 / 3; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service:nth-child(odd) { padding-right: 0; border-right: 0; }
+      .service:nth-child(even) { padding-left: 0; }
     }
 
-    body {
-      background-color: var(--lx-bg-base);
-      color: var(--lx-text-light);
-      font-family: var(--lx-font-sans);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* Universal Header */
-    .lx-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      padding: 1.75rem 3.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.6) 70%, transparent 100%);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.08);
-    }
-
-    .lx-brand {
-      font-family: var(--lx-font-serif);
-      font-size: 1.35rem;
-      letter-spacing: 0.35em;
-      color: var(--lx-text-light);
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .lx-brand::after {
-      content: "";
-      width: 6px;
-      height: 6px;
-      background-color: var(--lx-gold-primary);
-      display: inline-block;
-      transform: rotate(45deg);
-    }
-
-    .lx-nav {
-      display: flex;
-      gap: 3rem;
-      list-style: none;
-    }
-
-    .lx-nav a {
-      color: var(--lx-text-muted);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      transition: color 0.3s var(--ease-out);
-    }
-
-    .lx-nav a:hover {
-      color: var(--lx-gold-primary);
-    }
-
-    /* Fixed Aspect Ratio Enclosure */
-    .lx-media-frame {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: var(--lx-bg-surface);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .aspect-hero { aspect-ratio: 16 / 9; }
-    .aspect-portfolio { aspect-ratio: 4 / 5; }
-    .aspect-rate-card { aspect-ratio: 3 / 4; }
-
-    /* Branded Placeholder Core */
-    .lx-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      text-align: center;
-      background: radial-gradient(circle at center, #171511 0%, var(--lx-bg-base) 100%);
-      z-index: 1;
-      border: 1px solid var(--lx-gold-subtle);
-      user-select: none;
-    }
-
-    .lx-placeholder::before {
-      content: "";
-      width: 48px;
-      height: 48px;
-      background-color: var(--lx-gold-primary);
-      margin-bottom: 1.5rem;
-      opacity: 0.6;
-    }
-
-    .lx-placeholder p {
-      font-size: 0.875rem;
-      color: var(--lx-text-muted);
-      letter-spacing: 0.08em;
-    }
-
-    /* Container */
-    .lx-container {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 0 3.5rem;
-    }
-
-    /* Hero Section */
-    .lx-hero {
-      margin-top: 8rem;
-      padding: 4rem 0;
-    }
-
-    .lx-hero h1 {
-      font-family: var(--lx-font-serif);
-      font-size: 3.5rem;
-      line-height: 1.2;
-      margin-bottom: 2rem;
-      letter-spacing: -0.02em;
-    }
-
-    .lx-hero p {
-      font-size: 1.125rem;
-      color: var(--lx-text-muted);
-      max-width: 600px;
-      margin-bottom: 3rem;
-    }
-
-    /* Button */
-    .lx-btn {
-      display: inline-block;
-      padding: 0.875rem 2rem;
-      background-color: var(--lx-gold-primary);
-      color: var(--lx-bg-base);
-      text-decoration: none;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      transition: all 0.3s var(--ease-out);
-      border: 2px solid var(--lx-gold-primary);
-      cursor: pointer;
-      border-radius: 2px;
-    }
-
-    .lx-btn:hover {
-      background-color: transparent;
-      color: var(--lx-gold-primary);
-    }
-
-    .lx-btn-secondary {
-      background-color: transparent;
-      color: var(--lx-gold-primary);
-      border: 2px solid var(--lx-gold-primary);
-    }
-
-    .lx-btn-secondary:hover {
-      background-color: var(--lx-gold-primary);
-      color: var(--lx-bg-base);
-    }
-
-    /* Portfolio Grid */
-    .lx-portfolio {
-      padding: 6rem 0;
-    }
-
-    .lx-portfolio h2 {
-      font-family: var(--lx-font-serif);
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      letter-spacing: -0.02em;
-    }
-
-    .lx-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .lx-portfolio-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 4px;
-      transition: transform 0.4s var(--ease-out);
-    }
-
-    .lx-portfolio-item:hover {
-      transform: translateY(-8px);
-    }
-
-    /* Footer */
-    .lx-footer {
-      padding: 4rem 0;
-      border-top: 1px solid var(--lx-gold-subtle);
-      margin-top: 6rem;
-      text-align: center;
-      color: var(--lx-text-muted);
-      font-size: 0.875rem;
-    }
-
-    .lx-footer p {
-      margin-bottom: 1rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .lx-header {
-        padding: 1rem 1.5rem;
-      }
-
-      .lx-brand {
-        font-size: 1rem;
-      }
-
-      .lx-nav {
-        gap: 1.5rem;
-      }
-
-      .lx-hero h1 {
-        font-size: 2rem;
-      }
-
-      .lx-container {
-        padding: 0 1.5rem;
-      }
+    @media (max-width: 560px) {
+      .logo { font-size: 13px; }
+      nav a:nth-child(2) { display: none; }
+      h1 { font-size: 54px; }
+      .hero-image { height: 54vh; }
+      .section-head { display: block; }
+      .section-note { margin-top: 18px; }
+      .project-meta { display: block; }
+      .project-type { margin-top: 3px; }
+      footer { display: block; line-height: 2; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Header -->
-  <header class="lx-header">
-    <a href="#" class="lx-brand">LEOX7</a>
-    <nav>
-      <ul class="lx-nav">
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+  <header>
+    <a class="logo" href="#top" aria-label="LEOX7 home">LEOX7</a>
+    <nav aria-label="Primary navigation">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="lx-hero lx-container">
-    <h1>Editorial & Architectural Photography</h1>
-    <p>Capturing the essence of spaces and stories with precision and artistry.</p>
-    <a href="#portfolio" class="lx-btn">View Portfolio</a>
-  </section>
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow">Architecture · Interiors · Hospitality · Luxury</div>
+        <h1>Spaces,<br>seen differently.</h1>
+        <p>LEOX7 creates considered photographic stories for architects, designers, hospitality groups, publications and brands.</p>
+        <a class="link" href="#work">View selected work <span>→</span></a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=88" alt="Contemporary architectural interior with sculptural staircase">
+      </div>
+    </section>
 
-  <!-- Portfolio Section -->
-  <section id="portfolio" class="lx-portfolio lx-container">
-    <h2>Recent Work</h2>
-    <div class="lx-grid">
-      <div class="lx-portfolio-item">
-        <div class="lx-media-frame aspect-portfolio">
-          <div class="lx-placeholder">
-            <p>Portfolio Image 1</p>
+    <section id="work" class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">01 / Selected work</div>
+          <h2>Projects with a point of view.</h2>
+        </div>
+        <p class="section-note">A focused selection across architecture, interiors, hospitality and editorial commissions.</p>
+      </div>
+
+      <div class="work-grid">
+        <a class="project" href="#contact">
+          <div class="project-media"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=88" alt="Minimal luxury interior with natural light" loading="lazy"></div>
+          <div class="project-meta"><span class="project-title">Quiet Geometry</span><span class="project-type">Interiors · Dubai</span></div>
+        </a>
+        <a class="project" href="#contact">
+          <div class="project-media"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=88" alt="Modern villa architecture surrounded by landscape" loading="lazy"></div>
+          <div class="project-meta"><span class="project-title">House / Light</span><span class="project-type">Architecture · UAE</span></div>
+        </a>
+        <a class="project" href="#contact">
+          <div class="project-media"><img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=88" alt="Luxury hotel exterior at dusk" loading="lazy"></div>
+          <div class="project-meta"><span class="project-title">Arrival</span><span class="project-type">Hospitality · Editorial</span></div>
+        </a>
+        <a class="project" href="#contact">
+          <div class="project-media"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=88" alt="Refined contemporary living room" loading="lazy"></div>
+          <div class="project-meta"><span class="project-title">Material Study</span><span class="project-type">Design · Brand</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section id="about" class="manifesto">
+      <div class="wrap" style="display:contents">
+        <div class="manifesto" style="grid-column:1 / -1; padding:130px 0; border:0;">
+          <div>
+            <div class="section-kicker">02 / The approach</div>
+            <h2>Beyond documentation.</h2>
+          </div>
+          <div class="manifesto-copy">
+            <p>We photograph the relationship between space, light, material and human experience — creating images that can live in a campaign, a magazine, a monograph or a brand world.</p>
+            <small>From a single detail to an entire destination, every commission is approached with patience, precision and an editorial sensibility.</small>
           </div>
         </div>
       </div>
-      <div class="lx-portfolio-item">
-        <div class="lx-media-frame aspect-portfolio">
-          <div class="lx-placeholder">
-            <p>Portfolio Image 2</p>
-          </div>
+    </section>
+
+    <section id="services" class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">03 / Services</div>
+          <h2>Built for ambitious projects.</h2>
+        </div>
+        <p class="section-note">Flexible commissions for teams that care about how their work is seen.</p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service"><div class="service-number">01</div><h3>Architecture & Interiors</h3><p>Exterior, interior, detail and atmosphere photography for architects, interior designers, developers and property brands.</p></article>
+        <article class="service"><div class="service-number">02</div><h3>Hospitality</h3><p>Visual stories for hotels, resorts, restaurants and destinations — focused on experience, atmosphere and sense of place.</p></article>
+        <article class="service"><div class="service-number">03</div><h3>Editorial</h3><p>Publication-ready stories for magazines and cultural platforms across architecture, design, travel and place.</p></article>
+        <article class="service"><div class="service-number">04</div><h3>Luxury & Brands</h3><p>Refined imagery for brands where craftsmanship, material, detail and atmosphere are central to the story.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap process">
+      <div>
+        <div class="section-kicker">04 / Process</div>
+        <h2 style="margin-top:18px;">From brief to final frame.</h2>
+      </div>
+      <div class="process-list">
+        <div class="step"><div class="step-no">01</div><div><h3>Brief</h3><p>We understand the project, audience, deliverables and visual ambition.</p></div></div>
+        <div class="step"><div class="step-no">02</div><div><h3>Planning</h3><p>Shot planning, timing, location considerations and production coordination.</p></div></div>
+        <div class="step"><div class="step-no">03</div><div><h3>Photography</h3><p>Careful direction of light, composition, perspective and atmosphere on location.</p></div></div>
+        <div class="step"><div class="step-no">04</div><div><h3>Post-production</h3><p>Consistent, restrained retouching and a polished final image set.</p></div></div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="contact-inner wrap">
+        <h2>Have a project<br>in mind?</h2>
+        <div class="contact-copy">
+          <p>Tell us what you're working on, where it is happening, and what you need the images to achieve.</p>
+          <a class="link" href="mailto:hello@leox7.com">Start a commission <span>→</span></a>
         </div>
       </div>
-      <div class="lx-portfolio-item">
-        <div class="lx-media-frame aspect-portfolio">
-          <div class="lx-placeholder">
-            <p>Portfolio Image 3</p>
-          </div>
-        </div>
-      </div>
-      <div class="lx-portfolio-item">
-        <div class="lx-media-frame aspect-portfolio">
-          <div class="lx-placeholder">
-            <p>Portfolio Image 4</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- About Section -->
-  <section id="about" class="lx-container" style="padding: 6rem 0;">
-    <h2 style="font-family: var(--lx-font-serif); font-size: 2.5rem; margin-bottom: 2rem;">About LEOX7</h2>
-    <p style="max-width: 700px; color: var(--lx-text-muted); line-height: 1.8; margin-bottom: 2rem;">
-      LEOX7 specializes in editorial and architectural photography, bringing a refined perspective to every project. With a focus on lighting, composition, and storytelling, we create images that captivate and inspire.
-    </p>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="lx-container" style="padding: 6rem 0; text-align: center;">
-    <h2 style="font-family: var(--lx-font-serif); font-size: 2.5rem; margin-bottom: 2rem;">Ready to Collaborate?</h2>
-    <p style="color: var(--lx-text-muted); margin-bottom: 2rem;">Get in touch to discuss your next project.</p>
-    <a href="mailto:hello@leox7.com" class="lx-btn">Contact Us</a>
-  </section>
-
-  <!-- Footer -->
-  <footer class="lx-footer lx-container">
-    <p>&copy; 2026 LEOX7 Photography Studio. All rights reserved.</p>
-    <p>Editorial & Architectural Photography</p>
+  <footer class="wrap">
+    <span>© 2026 LEOX7 Photography Studio</span>
+    <span>UAE · Available internationally</span>
+    <span>hello@leox7.com</span>
   </footer>
-
 </body>
 </html>
