@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEOX7 — Editorial & Architectural Photography</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --lx-bg-base: #0a0a0a;
+      --lx-bg-surface: #121212;
+      --lx-bg-elevated: #1a1a1a;
+      --lx-gold-primary: #d4af37;
+      --lx-gold-muted: rgba(212, 175, 55, 0.45);
+      --lx-gold-subtle: rgba(212, 175, 55, 0.12);
+      --lx-text-light: #f5f5f5;
+      --lx-text-muted: #8e8e8e;
+      --lx-font-serif: "Cinzel", Georgia, serif;
+      --lx-font-sans: "Inter", -apple-system, sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--lx-bg-base);
+      color: var(--lx-text-light);
+      font-family: var(--lx-font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Universal Header */
+    .lx-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.75rem 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.6) 70%, transparent 100%);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+    }
+
+    .lx-brand {
+      font-family: var(--lx-font-serif);
+      font-size: 1.35rem;
+      letter-spacing: 0.35em;
+      color: var(--lx-text-light);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .lx-brand::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background-color: var(--lx-gold-primary);
+      display: inline-block;
+      transform: rotate(45deg);
+    }
+
+    .lx-nav {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .lx-nav a {
+      color: var(--lx-text-muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: color 0.3s var(--ease-out);
+    }
+
+    .lx-nav a:hover {
+      color: var(--lx-gold-primary);
+    }
+
+    /* Fixed Aspect Ratio Enclosure */
+    .lx-media-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--lx-bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .aspect-hero { aspect-ratio: 16 / 9; }
+    .aspect-portfolio { aspect-ratio: 4 / 5; }
+    .aspect-rate-card { aspect-ratio: 3 / 4; }
+
+    /* Branded Placeholder Core */
+    .lx-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      background: radial-gradient(circle at center, #171511 0%, var(--lx-bg-base) 100%);
+      z-index: 1;
+      border: 1px solid var(--lx-gold-subtle);
+      user-select: none;
+    }
+
+    .lx-placeholder::before {
+      content: "";
+      width: 48px;
+      height: 48px;
+      background-color: var(--lx-gold-primary);
+      margin-bottom: 1.5rem;
+      opacity: 0.6;
+    }
+
+    .lx-placeholder p {
+      font-size: 0.875rem;
+      color: var(--lx-text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* Container */
+    .lx-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 3.5rem;
+    }
+
+    /* Hero Section */
+    .lx-hero {
+      margin-top: 8rem;
+      padding: 4rem 0;
+    }
+
+    .lx-hero h1 {
+      font-family: var(--lx-font-serif);
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .lx-hero p {
+      font-size: 1.125rem;
+      color: var(--lx-text-muted);
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    /* Button */
+    .lx-btn {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      background-color: var(--lx-gold-primary);
+      color: var(--lx-bg-base);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      transition: all 0.3s var(--ease-out);
+      border: 2px solid var(--lx-gold-primary);
+      cursor: pointer;
+      border-radius: 2px;
+    }
+
+    .lx-btn:hover {
+      background-color: transparent;
+      color: var(--lx-gold-primary);
+    }
+
+    .lx-btn-secondary {
+      background-color: transparent;
+      color: var(--lx-gold-primary);
+      border: 2px solid var(--lx-gold-primary);
+    }
+
+    .lx-btn-secondary:hover {
+      background-color: var(--lx-gold-primary);
+      color: var(--lx-bg-base);
+    }
+
+    /* Portfolio Grid */
+    .lx-portfolio {
+      padding: 6rem 0;
+    }
+
+    .lx-portfolio h2 {
+      font-family: var(--lx-font-serif);
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .lx-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .lx-portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      transition: transform 0.4s var(--ease-out);
+    }
+
+    .lx-portfolio-item:hover {
+      transform: translateY(-8px);
+    }
+
+    /* Footer */
+    .lx-footer {
+      padding: 4rem 0;
+      border-top: 1px solid var(--lx-gold-subtle);
+      margin-top: 6rem;
+      text-align: center;
+      color: var(--lx-text-muted);
+      font-size: 0.875rem;
+    }
+
+    .lx-footer p {
+      margin-bottom: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .lx-header {
+        padding: 1rem 1.5rem;
+      }
+
+      .lx-brand {
+        font-size: 1rem;
+      }
+
+      .lx-nav {
+        gap: 1.5rem;
+      }
+
+      .lx-hero h1 {
+        font-size: 2rem;
+      }
+
+      .lx-container {
+        padding: 0 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="lx-header">
+    <a href="#" class="lx-brand">LEOX7</a>
+    <nav>
+      <ul class="lx-nav">
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="lx-hero lx-container">
+    <h1>Editorial & Architectural Photography</h1>
+    <p>Capturing the essence of spaces and stories with precision and artistry.</p>
+    <a href="#portfolio" class="lx-btn">View Portfolio</a>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="lx-portfolio lx-container">
+    <h2>Recent Work</h2>
+    <div class="lx-grid">
+      <div class="lx-portfolio-item">
+        <div class="lx-media-frame aspect-portfolio">
+          <div class="lx-placeholder">
+            <p>Portfolio Image 1</p>
+          </div>
+        </div>
+      </div>
+      <div class="lx-portfolio-item">
+        <div class="lx-media-frame aspect-portfolio">
+          <div class="lx-placeholder">
+            <p>Portfolio Image 2</p>
+          </div>
+        </div>
+      </div>
+      <div class="lx-portfolio-item">
+        <div class="lx-media-frame aspect-portfolio">
+          <div class="lx-placeholder">
+            <p>Portfolio Image 3</p>
+          </div>
+        </div>
+      </div>
+      <div class="lx-portfolio-item">
+        <div class="lx-media-frame aspect-portfolio">
+          <div class="lx-placeholder">
+            <p>Portfolio Image 4</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="lx-container" style="padding: 6rem 0;">
+    <h2 style="font-family: var(--lx-font-serif); font-size: 2.5rem; margin-bottom: 2rem;">About LEOX7</h2>
+    <p style="max-width: 700px; color: var(--lx-text-muted); line-height: 1.8; margin-bottom: 2rem;">
+      LEOX7 specializes in editorial and architectural photography, bringing a refined perspective to every project. With a focus on lighting, composition, and storytelling, we create images that captivate and inspire.
+    </p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="lx-container" style="padding: 6rem 0; text-align: center;">
+    <h2 style="font-family: var(--lx-font-serif); font-size: 2.5rem; margin-bottom: 2rem;">Ready to Collaborate?</h2>
+    <p style="color: var(--lx-text-muted); margin-bottom: 2rem;">Get in touch to discuss your next project.</p>
+    <a href="mailto:hello@leox7.com" class="lx-btn">Contact Us</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="lx-footer lx-container">
+    <p>&copy; 2026 LEOX7 Photography Studio. All rights reserved.</p>
+    <p>Editorial & Architectural Photography</p>
+  </footer>
+
+</body>
+</html>
